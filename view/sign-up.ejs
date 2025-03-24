@@ -1,0 +1,63 @@
+<% layout("/INCLUDE/boilerplate")%>
+
+<main class="flex-grow-1 d-flex align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow border-0 login-card">
+                    <div class="card-body p-4 p-md-5">
+                        <h1 class="text-center mb-4 fw-bold text-teal">SIGN UP</h1>
+
+                        <form action="/sign" method="POST" class="d-flex flex-column gap-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                                <label for="username">Username</label>
+                            </div>
+
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                <label for="email">Email</label>
+                            </div>
+
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                <label for="password">Password</label>
+                            </div>
+
+                            <div>
+                                <button type="submit" class="btn btn-gold w-100 py-2">SIGN UP</button>
+                            </div>
+
+                            <div class="text-center mt-2">
+                                <p class="small">Already have an account? 
+                                    <a href="/login" class="text-decoration-none text-teal fw-medium">Login</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="py-4 text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start">
+                <a href="/" class="footer-brand text-white">
+                    <i class="bi bi-leaf-fill"></i> Greenica
+                </a>
+                <p class="mb-0 small">Connecting locals with the environment</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <p class="mb-0 small">
+                    <i class="bi bi-envelope"></i> plant.greenica@gmail.com |
+                    <i class="bi bi-telephone"></i> +1 (555) 123-4567
+                </p>
+                <p class="mb-0 small">© 2025 Greenica. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,280 @@
+<% layout("/INCLUDE/boilerplate")%> 
+   <script src="/tabs.js"></script>
+    <main class="flex-grow-1">
+      <!-- Hero Section -->
+      <section class="py-5 bg-light">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+              <h1 class="display-4 fw-bold text-teal mb-3">Greenica</h1>
+              <p class="lead mb-4">Want to plant trees but don't know how? Join us in this amazing journey to connect with nature and make our environment greener.</p>
+              <div class="d-flex gap-3">
+                <a href="/category" class="btn btn-gold">Explore Now</a>
+                <a href="/shop" class="btn btn-outline-teal">Visit Shop</a>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <img src="https://images.unsplash.com/photo-1601985705806-5b9a71f6004f?w=600&h=500&crop=entropy&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+     alt="Plants" class="img-fluid"
+     >
+
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Forest Types Section -->
+      <section class="py-5 bg-white">
+        <div class="container">
+          <h2 class="text-center text-teal fw-bold mb-5">Explore Our Collections</h2>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="card h-100 border-0 shadow-sm hover-card">
+                <img src="https://images.unsplash.com/photo-1628486930648-fed98c4d56cb?q=80&w=400&h=300&auto=format&fit=crop" 
+     alt="Fruits" 
+     class="img-fluid">
+
+
+                <div class="card-body">
+                  <h3 class="card-title text-teal fw-semibold">Fruits</h3>
+                  <p class="card-text text-muted">Explore our collection of fruits seeds perfect for your garden.</p>
+                  <a href="/category" class="btn btn-sm btn-outline-gold mt-2">View Collection</a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="card h-100 border-0 shadow-sm hover-card">
+                <img src="https://plus.unsplash.com/premium_photo-1678382342594-413104d016e4?w=400&h=300&auto=format&fit=crop&q=60" 
+     alt="Flowers" 
+    class="img-fluid">
+
+                <div class="card-body">
+                  <h3 class="card-title text-teal fw-semibold">Flowers</h3>
+                  <p class="card-text text-muted">Discover unique and rare flower species that will make your garden stand out with their exotic beauty.</p>
+                  <a href="/category" class="btn btn-sm btn-outline-gold mt-2">View Collection</a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="card h-100 border-0 shadow-sm hover-card">
+                <img src="https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=400&h=300&crop=entropy&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+     alt="Indoor Plants" 
+     class="img-fluid">
+
+                <div class="card-body">
+                  <h3 class="card-title text-teal fw-semibold">Indoor Plants</h3>
+                  <p class="card-text text-muted">Create your own indoor oasis with our selection of plants perfect for apartments and office spaces.</p>
+                  <a href="/category" class="btn btn-sm btn-outline-gold mt-2">View Collection</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- How We Work Section -->
+      <section class="py-5 bg-light">
+        <div class="container">
+          <h2 class="text-center text-teal fw-bold mb-5">How We Work</h2>
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                  <ul class="nav nav-pills mb-4 justify-content-center" id="workTabs" role="tablist">
+                    <li class="nav-item mx-1" role="presentation">
+                      <button class="nav-link active px-4" id="forest-tab" data-bs-toggle="pill" data-bs-target="#forest" type="button">Forest</button>
+                    </li>
+                    <li class="nav-item mx-1" role="presentation">
+                      <button class="nav-link px-4" id="colony-tab" data-bs-toggle="pill" data-bs-target="#colony" type="button">Colony</button>
+                    </li>
+                    <li class="nav-item mx-1" role="presentation">
+                      <button class="nav-link px-4" id="process-tab" data-bs-toggle="pill" data-bs-target="#process" type="button">Process</button>
+                    </li>
+                  </ul>
+                  
+                  <div class="tab-content p-2" id="workTabsContent">
+                    <div class="tab-pane fade show active" id="forest" role="tabpanel">
+                      <div class="row align-items-center">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                          <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=500&h=400&crop=entropy&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+     alt="Forest" 
+     class="img-fluid">
+
+                        </div>
+                        <div class="col-md-6">
+                          <h4 class="text-teal mb-3">Forest Restoration</h4>
+                          <p class="text-muted">We identify areas that need reforestation and develop comprehensive plans to restore native ecosystems. Our approach focuses on biodiversity and sustainability.</p>
+                          <ul class="text-muted">
+                            <li>Native species selection</li>
+                            <li>Soil preparation and analysis</li>
+                            <li>Long-term monitoring and care</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="colony" role="tabpanel">
+                      <div class="row align-items-center">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                          <img src="https://plus.unsplash.com/premium_photo-1664811569310-04a7c276df1c?w=500&h=400&crop=entropy&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+     alt="Environment" 
+     class="img-fluid">
+
+                        </div>
+                        <div class="col-md-6">
+                          <h4 class="text-teal mb-3">Community Engagement</h4>
+                          <p class="text-muted">We build local communities of plant enthusiasts who work together to green their neighborhoods. Our colony approach ensures knowledge sharing and collective success.</p>
+                          <ul class="text-muted">
+                            <li>Local workshops and training</li>
+                            <li>Shared resources and tools</li>
+                            <li>Community planting events</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="process" role="tabpanel">
+                      <div class="row align-items-center">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                          <img src="https://images.unsplash.com/photo-1531321538006-82b62d9fbb1f?w=500&h=400&crop=entropy&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+     alt="Sustainable Development" 
+    class="img-fluid">
+
+                        </div>
+                        <div class="col-md-6">
+                          <h4 class="text-teal mb-3">Our Growing Process</h4>
+                          <p class="text-muted">From seed to thriving plant, our process ensures optimal growth and health. We use sustainable methods and organic inputs at every stage.</p>
+                          <ul class="text-muted">
+                            <li>Careful seed selection and testing</li>
+                            <li>Controlled germination environments</li>
+                            <li>Organic fertilization and pest management</li>
+                            <li>Climate-appropriate hardening</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Shop Section -->
+      <section class="py-5 bg-white">
+        <div class="container">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-teal fw-bold mb-0">Our Shop</h2>
+            <a href="/shop" class="btn btn-sm btn-outline-teal">View All</a>
+          </div>
+          
+          <div class="row row-cols-2 row-cols-md-5 g-3">
+            <div class="col">
+              <a href="/shop" class="text-decoration-none">
+                <div class="card h-100 border-0 shadow-sm text-center hover-card">
+                  <div class="card-body py-4">
+                    <i class="bi bi-flower3 text-teal fs-1 mb-3"></i>
+                    <h5 class="card-title text-dark">Seeds</h5>
+                  </div>
+                </div>
+              </a>
+            </div>
+            
+            <div class="col">
+              <a href="/shop" class="text-decoration-none">
+                <div class="card h-100 border-0 shadow-sm text-center hover-card">
+                  <div class="card-body py-4">
+                    <i class="bi bi-basket text-teal fs-1 mb-3"></i>
+                    <h5 class="card-title text-dark">Pots</h5>
+                  </div>
+                </div>
+              </a>
+            </div>
+            
+            <div class="col">
+              <a href="/shop" class="text-decoration-none">
+                <div class="card h-100 border-0 shadow-sm text-center hover-card">
+                  <div class="card-body py-4">
+                    <i class="bi bi-droplet text-teal fs-1 mb-3"></i>
+                    <h5 class="card-title text-dark">Sprinklers</h5>
+                  </div>
+                </div>
+              </a>
+            </div>
+            
+            <div class="col">
+              <a href="/shop" class="text-decoration-none">
+                <div class="card h-100 border-0 shadow-sm text-center hover-card">
+                  <div class="card-body py-4">
+                    <i class="bi bi-tools text-teal fs-1 mb-3"></i>
+                    <h5 class="card-title text-dark">Tools</h5>
+                  </div>
+                </div>
+              </a>
+            </div>
+            
+            <div class="col">
+              <a href="/shop" class="text-decoration-none">
+                <div class="card h-100 border-0 shadow-sm text-center hover-card">
+                  <div class="card-body py-4">
+                    <i class="bi bi-moisture text-teal fs-1 mb-3"></i>
+                    <h5 class="card-title text-dark">Fertilizers</h5>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Newsletter Section -->
+      <section class="py-5 bg-light">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body p-4 p-md-5 text-center">
+                  <h2 class="text-teal fw-bold mb-3">Stay Connected</h2>
+                  <p class="text-muted mb-4">Subscribe to our newsletter for gardening tips, new arrivals, and exclusive offers.</p>
+                  <div class="row justify-content-center">
+                    <div class="col-md-8">
+                      <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-gold" type="button">Subscribe</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <footer class="bg-teal text-white py-4">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <a class="navbar-brand fw-bold text-white" href="/">
+              <i class="bi bi-leaf-fill me-2"></i>Greenica
+            </a>
+            <p class="mb-0 small">Connecting locals with the environment</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <p class="mb-0 small">
+              <i class="bi bi-envelope me-1"></i> plant.greenica@gmail.com
+              <span class="mx-2">|</span>
+              <i class="bi bi-telephone me-1"></i> +1 (555) 123-4567
+            </p>
+            <p class="mb-0 small">© 2025 Greenica. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  

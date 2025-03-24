@@ -1,0 +1,246 @@
+<% layout("/INCLUDE/boilerplate")%> 
+
+  <!-- Main Content -->
+  <main class="bg-light">
+    <div class="container py-4">
+      <h1>Plant Growth Visualization</h1>
+      <p class="lead">Select a seed to see growth tips and visualize how your plant will look based on current weather conditions.</p>
+      
+      <div class="row g-4">
+        <!-- Weather Section -->
+        <div class="col-lg-4">
+          <div class="weather-card">
+            <h2>Current Weather</h2>
+            <div id="weather-info" class="weather-info">
+              <div class="spinner-border text-teal" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <p>Loading weather data...</p>
+            </div>
+          </div>
+
+<!-- Weather API addition -->
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const apiKey = "d0bb05d1f9378c9b356a38594a54f232"; 
+        const weatherInfo = document.getElementById("weather-info");
+
+        function fetchWeather(lat, lon) {
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const weatherHTML = `
+                        <h3>${data.name}</h3>
+                        <p>${data.weather[0].description}</p>
+                        <p>Temperature: ${data.main.temp}°C</p>
+                        <p>Humidity: ${data.main.humidity}%</p>
+                        <p>Wind Speed: ${data.wind.speed} m/s</p>
+                    `;
+
+                    const weatherContainer = document.createElement("div");
+                    weatherContainer.innerHTML = weatherHTML;
+
+                    weatherInfo.innerHTML = "";
+                    weatherInfo.appendChild(weatherContainer);
+                })
+                .catch(error => {
+                    console.error("Error fetching weather data:", error);
+                    weatherInfo.innerHTML = "<p>Failed to load weather data.</p>";
+                });
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => fetchWeather(position.coords.latitude, position.coords.longitude),
+                    error => {
+                        console.error("Geolocation error:", error);
+                        weatherInfo.innerHTML = "<p>Location access denied. Unable to fetch weather data.</p>";
+                    }
+                );
+            } else {
+                weatherInfo.innerHTML = "<p>Geolocation is not supported by this browser.</p>";
+            }
+        }
+
+        getLocation();
+    });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const plantImages = {
+    sunflower: "https://images.unsplash.com/photo-1548291616-bfccc8db731d?w=600&h=500&auto=format&fit=crop&q=60",
+    tomato: "https://images.unsplash.com/photo-1599663371158-b5d9ae173108?w=600&h=500&auto=format&fit=crop&q=60",
+    basil: "https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=600&h=500&auto=format&fit=crop&q=60",
+    marigold: "https://images.unsplash.com/photo-1613899697749-0a46140e1166?w=600&h=500&auto=format&fit=crop&q=60",
+    mint: "https://images.unsplash.com/photo-1656501020056-1c631268e3d0?w=600&h=450&auto=format&fit=crop&q=60" // Decreased height
+  };
+
+    const generateBtn = document.getElementById("generate-btn");
+    const seedSelect = document.getElementById("seed-select");
+    const plantAgeInput = document.getElementById("plant-age");
+
+    if (!generateBtn || !seedSelect || !plantAgeInput) {
+        console.error("One or more required elements are missing.");
+        return;
+    }
+
+    generateBtn.addEventListener("click", function () {
+        const selectedSeed = seedSelect.value;
+        const plantAge = plantAgeInput.value;
+
+        if (!selectedSeed) {
+            alert("Please select a seed first!");
+            return;
+        }
+
+        console.log("Seed selected:", selectedSeed);
+        console.log("Plant Age:", plantAge);
+
+        const noSelection = document.getElementById("no-selection");
+        const plantVisualization = document.getElementById("plant-visualization");
+        const plantName = document.getElementById("plant-name");
+        const plantImage = document.getElementById("plant-image");
+        const growthStage = document.getElementById("growth-stage");
+        const displayAge = document.getElementById("display-age");
+        const growthProgress = document.getElementById("growth-progress");
+        const expectedHarvest = document.getElementById("expected-harvest");
+
+        if (!plantName || !plantImage || !growthStage || !displayAge || !growthProgress || !expectedHarvest) {
+            console.error("One or more required visualization elements are missing.");
+            return;
+        }
+
+        noSelection.classList.add("d-none");
+        plantVisualization.classList.remove("d-none");
+
+
+        plantName.textContent = selectedSeed.charAt(0).toUpperCase() + selectedSeed.slice(1);
+        plantImage.src = plantImages[selectedSeed];
+        plantImage.alt = `${selectedSeed} plant`;
+
+        let stageText = "Seedling";
+        if (plantAge >= 4 && plantAge < 8) {
+            stageText = "Vegetative";
+        } else if (plantAge >= 8) {
+            stageText = "Mature & Blooming";
+        }
+        growthStage.textContent = stageText;
+
+        displayAge.textContent = plantAge;
+
+        const progressPercentage = Math.round((plantAge / 12) * 100);
+        growthProgress.style.width = `${progressPercentage}%`;
+        growthProgress.textContent = `${progressPercentage}%`;
+
+        expectedHarvest.textContent = plantAge >= 8 ? "Ready for harvest soon!" : "Keep nurturing your plant!";
+    });
+});
+
+
+</script>
+
+    
+<!-- Weather API addition ends -->
+
+          <div class="seed-selector-card">
+            <h2>Select a Seed</h2>
+            <div class="mb-3">
+              <select class="form-select" id="seed-select">
+                <option value="" selected disabled>Choose a seed...</option>
+                <option value="sunflower">Sunflower</option>
+                <option value="tomato">Cherry Tomato</option>
+                <option value="basil">Basil</option>
+                <option value="marigold">Marigold</option>
+                <option value="mint">Mint</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="plant-age" class="form-label">Plant Age (weeks)</label>
+              <input type="range" class="form-range" id="plant-age" min="1" max="12" value="4">
+              <div class="d-flex justify-content-between">
+                <span>1 week</span>
+                <span id="age-value">4 weeks</span>
+                <span>12 weeks</span>
+              </div>
+            </div>
+            <button id="generate-btn" class="btn btn-gold w-100">Generate Plant Visualization</button>
+          </div>
+        </div>
+        
+        <!-- Plant Visualization and Tips -->
+        <div class="col-lg-8">
+          <div class="growth-card">
+            <h2>Plant Visualization</h2>
+            <div id="no-selection" class="text-center py-5">
+              <i class="bi bi-flower3 text-teal" style="font-size: 4rem;"></i>
+              <p class="mt-3">Select a seed and click "Generate" to see how your plant will look.</p>
+            </div>
+            
+            <div id="plant-visualization" class="d-none">
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <div class="plant-image-container">
+                    <div id="loading-image" class="text-center py-5 d-none">
+                      <div class="spinner-border text-teal" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                      <p class="mt-3">Generating plant visualization...</p>
+                    </div>
+                    <img id="plant-image" src="/placeholder.svg" alt="Plant Visualization" class="img-fluid rounded shadow-sm">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="plant-info">
+                    <h3 id="plant-name">Plant Name</h3>
+                    <div class="plant-stage mb-3">
+                      <span class="badge bg-teal">Age: <span id="display-age">4</span> weeks</span>
+                      <span id="growth-stage" class="badge bg-gold ms-2">Seedling</span>
+                    </div>
+                    <p id="plant-description">Plant description will appear here.</p>
+                    <div class="progress mb-3">
+                      <div id="growth-progress" class="progress-bar" style="width: 30%;">30%</div>
+                    </div>
+                    <p><strong>Expected harvest/bloom:</strong> <span id="expected-harvest">Loading...</span></p>
+                  </div>
+                </div>
+              </div>
+              
+              <h3>Growth Tips Based on Current Weather</h3>
+              <div id="weather-tips" class="weather-tips">
+                <div class="alert alert-teal">
+                  <i class="bi bi-info-circle me-2"></i>
+                  Select a seed to see weather-specific growing tips.
+                </div>
+              </div>
+              
+              <h3>Care Instructions</h3>
+              <div id="care-instructions" class="care-instructions">
+                <!-- Care instructions will be populated here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start">
+          <a href="/" class="footer-brand"><i class="bi bi-leaf-fill"></i> Greenica</a>
+          <p>Connecting locals with the environment</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <p><i class="bi bi-envelope"></i> plant.greenica@gmail.com | <i class="bi bi-telephone"></i> +1 (555) 123-4567</p>
+          <p>© 2025 Greenica. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+ 

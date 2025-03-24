@@ -1,0 +1,291 @@
+<% layout("/INCLUDE/boilerplate")%> 
+    
+    <main class="flex-grow-1 bg-light">
+      <div class="container py-5">
+        <h1 class="display-5 fw-bold text-teal mb-4">Shop</h1>
+        
+        <div class="row g-4">
+          <!-- Filters -->
+          <div class="col-lg-3">
+            <div class="card border-0 shadow-sm sticky-lg-top" style="top: 20px; z-index: 1;">
+              <div class="card-body p-4">
+                <h2 class="fs-4 fw-semibold text-teal mb-4">Filters</h2>
+                
+                <div class="mb-4">
+                  <h3 class="fs-5 mb-3 text-teal">Categories</h3>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="trees">
+                    <label class="form-check-label text-muted" for="trees">Trees</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="flowers">
+                    <label class="form-check-label text-muted" for="flowers">Flowers</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="small-plants">
+                    <label class="form-check-label text-muted" for="small-plants">Small Plants</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="fruits-veges">
+                    <label class="form-check-label text-muted" for="fruits-veges">Fruits & Veges</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="pots">
+                    <label class="form-check-label text-muted" for="pots">Pots</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="seeds">
+                    <label class="form-check-label text-muted" for="seeds">Seeds</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="tools">
+                    <label class="form-check-label text-muted" for="tools">Tools</label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="pesticides">
+                    <label class="form-check-label text-muted" for="pesticides">Organic Pesticides</label>
+                  </div>
+                </div>
+                
+                <div class="mb-4">
+                  <h3 class="fs-5 mb-3 text-teal">Price Range</h3>
+                  <input type="range" class="form-range mb-3" min="0" max="100" value="50">
+                  <div class="d-flex gap-2">
+                    <input type="number" class="form-control form-control-sm" placeholder="Min">
+                    <span class="align-self-center">-</span>
+                    <input type="number" class="form-control form-control-sm" placeholder="Max">
+                  </div>
+                </div>
+                
+                <button class="btn btn-gold w-100">Apply Filters</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Products -->
+
+
+
+          <div class="col-lg-9">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="fs-5 text-muted">Showing 6 of 60 products</div>
+              <div class="d-flex align-items-center gap-2">
+                <span class="text-muted">Sort by:</span>
+                <select class="form-select form-select-sm" style="width: auto;">
+                  <option>Popularity</option>
+                  <option>Price: Low to High</option>
+                  <option>Price: High to Low</option>
+                  <option>Newest</option>
+                </select>
+              </div>
+            </div>
+
+
+
+            
+            
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+              <!-- Product Card 1 -->
+              <div class="col">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                  <div class="position-relative">
+                    <img src="https://plus.unsplash.com/premium_photo-1682146984818-d24498219c2b?w=250&h=250&auto=format&fit=crop&q=80" 
+     alt="Organic Pesticide" 
+     class="img-fluid rounded">
+
+                    <div class="position-absolute top-0 end-0 p-2">
+                      <button class="btn btn-sm btn-light rounded-circle me-1">
+                        <i class="bi bi-heart text-muted"></i>
+                      </button>
+                      <button class="btn btn-sm btn-light rounded-circle">
+                        <i class="bi bi-cart-plus text-muted"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body p-4">
+                    <h5 class="card-title text-teal">Organic Pesticide</h5>
+                    <p class="card-text small text-muted">Natural pest control solution that's safe for plants, pets, and the environment.</p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <span class="text-gold fw-bold">$19.99</span>
+                      <span class="badge bg-teal bg-opacity-10 text-teal">In Stock</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Product Card 2 -->
+              <div class="col">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                  <div class="position-relative">
+                    <img src="https://images.unsplash.com/photo-1527642220350-24155bae0505?w=250&h=250&auto=format&fit=crop&q=60" 
+     alt="Ceramic Flower Pot" 
+     width="250" height="250">
+
+                    <div class="position-absolute top-0 end-0 p-2">
+                      <button class="btn btn-sm btn-light rounded-circle me-1">
+                        <i class="bi bi-heart text-muted"></i>
+                      </button>
+                      <button class="btn btn-sm btn-light rounded-circle">
+                        <i class="bi bi-cart-plus text-muted"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body p-4">
+                    <h5 class="card-title text-teal">Ceramic Flower Pot</h5>
+                    <p class="card-text small text-muted">Elegant ceramic pot with drainage hole, perfect for indoor and outdoor plants.</p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <span class="text-gold fw-bold">$24.99</span>
+                      <span class="badge bg-teal bg-opacity-10 text-teal">In Stock</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Product Card 3 -->
+              <div class="col">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                  <div class="position-relative">
+                    <img src="https://plus.unsplash.com/premium_photo-1664200630491-5f0bda86db50?w=250&h=250&auto=format&fit=crop&q=80" 
+     alt="Garden tool set" 
+     width="250" height="250">
+
+                    <div class="position-absolute top-0 end-0 p-2">
+                      <button class="btn btn-sm btn-light rounded-circle me-1">
+                        <i class="bi bi-heart text-muted"></i>
+                      </button>
+                      <button class="btn btn-sm btn-light rounded-circle">
+                        <i class="bi bi-cart-plus text-muted"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body p-4">
+                    <h5 class="card-title text-teal">Garden Tool Set</h5>
+                    <p class="card-text small text-muted">Complete set of essential gardening tools made from durable stainless steel.</p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <span class="text-gold fw-bold">$34.99</span>
+                      <span class="badge bg-teal bg-opacity-10 text-teal">In Stock</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Product Card 4 -->
+              <div class="col">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                  <div class="position-relative">
+                    <img src="https://plus.unsplash.com/premium_photo-1678509112838-3412ba938a52?w=250&h=250&auto=format&fit=crop&q=60" 
+     alt="Organic Fertilizer" 
+     width="250" height="250">
+
+                    <div class="position-absolute top-0 end-0 p-2">
+                      <button class="btn btn-sm btn-light rounded-circle me-1">
+                        <i class="bi bi-heart text-muted"></i>
+                      </button>
+                      <button class="btn btn-sm btn-light rounded-circle">
+                        <i class="bi bi-cart-plus text-muted"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body p-4">
+                    <h5 class="card-title text-teal">Organic Fertilizer</h5>
+                    <p class="card-text small text-muted">Nutrient-rich organic fertilizer that promotes healthy plant growth.</p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <span class="text-gold fw-bold">$15.99</span>
+                      <span class="badge bg-teal bg-opacity-10 text-teal">In Stock</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Product Card 5 -->
+              <div class="col">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                  <div class="position-relative">
+                    <img src="https://images.unsplash.com/photo-1626047876082-9a54bf80daa3?w=250&h=250&auto=format&fit=crop&q=60" 
+     alt="Watering Can" 
+     width="250" height="250">
+
+                    <div class="position-absolute top-0 end-0 p-2">
+                      <button class="btn btn-sm btn-light rounded-circle me-1">
+                        <i class="bi bi-heart text-muted"></i>
+                      </button>
+                      <button class="btn btn-sm btn-light rounded-circle">
+                        <i class="bi bi-cart-plus text-muted"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body p-4">
+                    <h5 class="card-title text-teal">Watering Can</h5>
+                    <p class="card-text small text-muted">Elegant watering can with precise pour spout for controlled watering.</p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <span class="text-gold fw-bold">$12.99</span>
+                      <span class="badge bg-teal bg-opacity-10 text-teal">In Stock</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Product Card 6 -->
+              <div class="col">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                  <div class="position-relative">
+                    <img src="https://plus.unsplash.com/premium_photo-1678652878688-e4638fbff9bb?w=250&h=250&auto=format&fit=crop&q=60" 
+     alt="Seed Starter Kit" 
+     width="250" height="250">
+
+                    <div class="position-absolute top-0 end-0 p-2">
+                      <button class="btn btn-sm btn-light rounded-circle me-1">
+                        <i class="bi bi-heart text-muted"></i>
+                      </button>
+                      <button class="btn btn-sm btn-light rounded-circle">
+                        <i class="bi bi-cart-plus text-muted"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body p-4">
+                    <h5 class="card-title text-teal">Seed Starter Kit</h5>
+                    <p class="card-text small text-muted">Complete kit with biodegradable pots, soil, and markers to start your garden.</p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <span class="text-gold fw-bold">$29.99</span>
+                      <span class="badge bg-teal bg-opacity-10 text-teal">In Stock</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="d-flex justify-content-center mt-5 gap-2">
+              <button class="btn btn-outline-teal rounded-circle" style="width: 40px; height: 40px;">1</button>
+              <button class="btn btn-outline-teal rounded-circle" style="width: 40px; height: 40px;">2</button>
+              <button class="btn btn-outline-teal rounded-circle" style="width: 40px; height: 40px;">3</button>
+              <span class="d-flex align-items-center">...</span>
+              <button class="btn btn-outline-teal rounded-circle" style="width: 40px; height: 40px;">10</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <footer class="bg-teal text-white py-4">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <a class="navbar-brand fw-bold text-white" href="home.html">
+              <i class="bi bi-leaf-fill me-2"></i>Greenica
+            </a>
+            <p class="mb-0 small">Connecting locals with the environment</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <p class="mb-0 small">
+              <i class="bi bi-envelope me-1"></i> plant.greenica@gmail.com
+              <span class="mx-2">|</span>
+              <i class="bi bi-telephone me-1"></i> +1 (555) 123-4567
+            </p>
+            <p class="mb-0 small">© 2025 Greenica. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+ 
