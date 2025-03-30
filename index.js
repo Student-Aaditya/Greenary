@@ -57,7 +57,7 @@ passport.deserializeUser(User.deserializeUser());
 async function main() {
     try {
         console.log("Attempting to connect to MongoDB...");
-        await mongoose.connect("mongodb://127.0.0.1:27017/Greenary", {
+        await mongoose.connect(Mongo, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             serverSelectionTimeoutMS: 10000,  
@@ -71,7 +71,7 @@ async function main() {
 
 const globallimit=rateLimit({
     window:10 *60*1000,
-    max:2,
+    max:5,
     message:{message:"too many time login please login after some time"},
     standarHeaders:true,
     legacyHeaders:false
