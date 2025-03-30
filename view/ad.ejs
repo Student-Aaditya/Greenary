@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Signup</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
+        input, button { width: 100%; padding: 10px; margin: 10px 0; }
+        button { background-color: green; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: darkgreen; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Admin Signup</h2>
+        <input type="email" id="adminEmail" placeholder="Enter Admin Email">
+        <input type="password" id="adminPassword" placeholder="Enter Password">
+        <button onclick="registerAdmin()">Sign Up</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        async function registerAdmin() {
+            const email = document.getElementById("adminEmail").value;
+            const password = document.getElementById("adminPassword").value;
+
+            if (!email || !password) {
+                document.getElementById("message").innerText = "All fields are required!";
+                return;
+            }
+            const response = await fetch("http://localhost:8020/admin/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await response.json();
+            document.getElementById("message").innerText = data.message;
+        }
+    </script>
+
+</body>
+</html>

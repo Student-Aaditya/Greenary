@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Unlock User</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
+        input, button { width: 100%; padding: 10px; margin: 10px 0; }
+        button { background-color: blue; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: darkblue; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Admin Unlock User</h2>
+        <input type="email" id="adminEmail" placeholder="Enter Admin Email">
+        <input type="password" id="adminPassword" placeholder="Enter Admin Password">
+        <input type="email" id="userEmail" placeholder="Enter User Email">
+        <button onclick="unlockUser()">Unlock User</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        async function unlockUser() {
+            const adminEmail = document.getElementById("adminEmail").value;
+            const adminPassword = document.getElementById("adminPassword").value;
+            const email = document.getElementById("userEmail").value;
+
+            if (!adminEmail || !adminPassword || !email) {
+                document.getElementById("message").innerText = "All fields are required!";
+                return;
+            }
+
+            const response = await fetch("http://localhost:8020/admin/unlock-user", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ adminEmail, adminPassword, email })
+            });
+
+            const data = await response.json();
+            document.getElementById("message").innerText = data.message;
+        }
+    </script>
+
+</body>
+</html>
