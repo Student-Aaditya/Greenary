@@ -31,6 +31,11 @@ const sessionOption = ({
     saveUninitialized: true,
 })
 
+app.use((req,res,next)=>{
+    res.locals.user=req.user;
+    next();
+})
+
 app.use(session(sessionOption));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -40,11 +45,30 @@ passport.deserializeUser(User.deserializeUser());
 
 
 
-async function main() {
-    // await mongoose.connect("mongodb://127.0.0.1:27017/Plant");
-    await mongoose.connect(Mongo);
+// async function main() {
+//     await mongoose.connect(Mongo);
+//     // serverSelectionTimeoutMS: 30000;
+//     // await mongoose.connect(Mongo);
 
+// }
+async function main() {
+    try {
+        console.log("Attempting to connect to MongoDB...");
+        await mongoose.connect(Mongo, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 10000,  // 10 seconds timeout
+        });
+        console.log("Successful connection to MongoDB");
+    } catch (err) {
+        console.error("MongoDB connection error:", err);
+    }
 }
+
+
+
+
+
 main().
     then(() => {
         console.log("sucessful connection");
