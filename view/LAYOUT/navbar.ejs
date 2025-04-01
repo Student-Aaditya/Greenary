@@ -27,12 +27,12 @@
             <input type="text" class="form-control form-control-sm pe-4" placeholder="Search...">
             <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-2 text-muted small"></i>
           </div>
-          <%if(!user){%>
+          <% if (user) { %>
+            <a class="btn btn-outline-teal btn-sm" href="/logout">Log-Out</a>
+        <% } else { %>
             <a href="/login" class="btn btn-outline-teal btn-sm">Login</a>
-            <%}%>
-              <%if(user){%>
-                <a class="btn btn-outline-teal btn-sm " href="/logout">Log-Out</a>
-                <%}%>
+        <% } %>
+        
         </div>
       </div>
     </nav>

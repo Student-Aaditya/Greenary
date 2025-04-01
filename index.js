@@ -37,11 +37,8 @@ const sessionOption = ({
     saveUninitialized: true,
 })
 
-app.use((req,res,next)=>{
-    res.locals.user=req.user;
 
-    next();
-})
+
 
 app.use(session(sessionOption));
 app.use(flash());
@@ -51,16 +48,21 @@ passport.use(new passportLocal(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use((req,res,next)=>{
+    res.locals.user=req.user;
+    res.locals.time=req.time;
 
+    next();
+})
 
 
 async function main() {
     try {
         console.log("Attempting to connect to MongoDB...");
-        await mongoose.connect(Mongo, {
+        await mongoose.connect("mongodb://127.0.0.1:27017/Greenica", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 10000,  
+            serverSelectionTimeoutMS: 20000,  
         });
         console.log("Successful connection to MongoDB");
     } catch (err) {
@@ -147,6 +149,21 @@ app.get("/login",(req,res)=>{
 app.post("/login",globallimit, passport.authenticate("local", { failureRedirect: "/login", failureFlash: true }), async (req, res) => {
     console.log("login");
     res.redirect("/");
+})
+
+app.get("/logout", (req, res) => {
+    try {
+        req.logOut((err) => {
+            if (err) {
+                nextTick(err);
+            }
+            res.redirect("/");
+        })
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).send("please fill the data");
+    }
 })
 
 app.get("/admin",(req,res)=>{
