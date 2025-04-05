@@ -72,9 +72,9 @@ app.use((req,res,next)=>{
 async function main() {
     try {
         console.log("Attempting to connect to MongoDB...");
-        await mongoose.connect("mongodb://127.0.0.1:27017/Greenica", {
-            // useNewUrlParser: true,
-            // useUnifiedTopology: true,
+        await mongoose.connect(Mongo, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
             serverSelectionTimeoutMS: 20000,  
         });
         console.log("Successful connection to MongoDB");
