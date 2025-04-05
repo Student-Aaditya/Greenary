@@ -1,11 +1,12 @@
-<% layout("/INCLUDE/boilerplate")%> 
+<% layout("/INCLUDE/boilerplate")%>
 
   <!-- Main Content -->
   <main class="bg-light">
     <div class="container py-4">
       <h1>Plant Growth Visualization</h1>
-      <p class="lead">Select a seed to see growth tips and visualize how your plant will look based on current weather conditions.</p>
-      
+      <p class="lead">Select a seed to see growth tips and visualize how your plant will look based on current weather
+        conditions.</p>
+
       <div class="row g-4">
         <!-- Weather Section -->
         <div class="col-lg-4">
@@ -20,17 +21,17 @@
           </div>
 
 
-        <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const apiKey = Weather_key; 
-        const weatherInfo = document.getElementById("weather-info");
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              const apiKey = d0bb05d1f9378c9b356a38594a54f232;
+              const weatherInfo = document.getElementById("weather-info");
 
-        function fetchWeather(lat, lon) {
-            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+              function fetchWeather(lat, lon) {
+                const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
+                fetch(url)
+                  .then(response => response.json())
+                  .then(data => {
                     const weatherHTML = `
                         <h3>${data.name}</h3>
                         <p>${data.weather[0].description}</p>
@@ -44,105 +45,155 @@
 
                     weatherInfo.innerHTML = "";
                     weatherInfo.appendChild(weatherContainer);
-                })
-                .catch(error => {
+                  })
+                  .catch(error => {
                     console.error("Error fetching weather data:", error);
                     weatherInfo.innerHTML = "<p>Failed to load weather data.</p>";
-                });
-        }
+                  });
+              }
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
+              function getLocation() {
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(
                     position => fetchWeather(position.coords.latitude, position.coords.longitude),
                     error => {
-                        console.error("Geolocation error:", error);
-                        weatherInfo.innerHTML = "<p>Location access denied. Unable to fetch weather data.</p>";
+                      console.error("Geolocation error:", error);
+                      weatherInfo.innerHTML = "<p>Location access denied. Unable to fetch weather data.</p>";
                     }
-                );
-            } else {
-                weatherInfo.innerHTML = "<p>Geolocation is not supported by this browser.</p>";
-            }
+                  );
+                } else {
+                  weatherInfo.innerHTML = "<p>Geolocation is not supported by this browser.</p>";
+                }
+              }
+
+              getLocation();
+            });
+
+
+            document.addEventListener("DOMContentLoaded", function () {
+              const plantImages = {
+                sunflower: "https://images.unsplash.com/photo-1548291616-bfccc8db731d?w=600&h=500&auto=format&fit=crop&q=60",
+                tomato: "https://images.unsplash.com/photo-1599663371158-b5d9ae173108?w=600&h=500&auto=format&fit=crop&q=60",
+                basil: "https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=600&h=500&auto=format&fit=crop&q=60",
+                marigold: "https://images.unsplash.com/photo-1613899697749-0a46140e1166?w=600&h=500&auto=format&fit=crop&q=60",
+                mint: "https://images.unsplash.com/photo-1656501020056-1c631268e3d0?w=600&h=450&auto=format&fit=crop&q=60" // Decreased height
+              };
+
+              const generateBtn = document.getElementById("generate-btn");
+              const seedSelect = document.getElementById("seed-select");
+              const plantAgeInput = document.getElementById("plant-age");
+
+              if (!generateBtn || !seedSelect || !plantAgeInput) {
+                console.error("One or more required elements are missing.");
+                return;
+              }
+
+              generateBtn.addEventListener("click", function () {
+                const selectedSeed = seedSelect.value;
+                const plantAge = plantAgeInput.value;
+
+                if (!selectedSeed) {
+                  alert("Please select a seed first!");
+                  return;
+                }
+
+                console.log("Seed selected:", selectedSeed);
+                console.log("Plant Age:", plantAge);
+
+                const noSelection = document.getElementById("no-selection");
+                const plantVisualization = document.getElementById("plant-visualization");
+                const plantName = document.getElementById("plant-name");
+                const plantImage = document.getElementById("plant-image");
+                const growthStage = document.getElementById("growth-stage");
+                const displayAge = document.getElementById("display-age");
+                const growthProgress = document.getElementById("growth-progress");
+                const expectedHarvest = document.getElementById("expected-harvest");
+
+                if (!plantName || !plantImage || !growthStage || !displayAge || !growthProgress || !expectedHarvest) {
+                  console.error("One or more required visualization elements are missing.");
+                  return;
+                }
+
+                noSelection.classList.add("d-none");
+                plantVisualization.classList.remove("d-none");
+
+
+                plantName.textContent = selectedSeed.charAt(0).toUpperCase() + selectedSeed.slice(1);
+                plantImage.src = plantImages[selectedSeed];
+                plantImage.alt = `${selectedSeed} plant`;
+
+                let stageText = "Seedling";
+                if (plantAge >= 4 && plantAge < 8) {
+                  stageText = "Vegetative";
+                } else if (plantAge >= 8) {
+                  stageText = "Mature & Blooming";
+                }
+                growthStage.textContent = stageText;
+
+                displayAge.textContent = plantAge;
+
+                const progressPercentage = Math.round((plantAge / 12) * 100);
+                growthProgress.style.width = `${progressPercentage}%`;
+                growthProgress.textContent = `${progressPercentage}%`;
+
+                expectedHarvest.textContent = plantAge >= 8 ? "Ready for harvest soon!" : "Keep nurturing your plant!";
+              });
+            });
+
+            async function fetchContent() {
+            const res = await fetch("/apis/content");
+            const data = await res.json();
+            document.getElementById("output").innerText = data.result;
         }
 
-        getLocation();
-    });
 
+        document.addEventListener("DOMContentLoaded", () => {
+  const seedSelect = document.getElementById("seed-select");
+  const plantAge = document.getElementById("plant-age");
+  const ageValue = document.getElementById("age-value");
+  const generateBtn = document.getElementById("generate-btn");
+  const output = document.getElementById("output"); // Make sure this exists in your HTML
 
-document.addEventListener("DOMContentLoaded", function () {
-  const plantImages = {
-    sunflower: "https://images.unsplash.com/photo-1548291616-bfccc8db731d?w=600&h=500&auto=format&fit=crop&q=60",
-    tomato: "https://images.unsplash.com/photo-1599663371158-b5d9ae173108?w=600&h=500&auto=format&fit=crop&q=60",
-    basil: "https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=600&h=500&auto=format&fit=crop&q=60",
-    marigold: "https://images.unsplash.com/photo-1613899697749-0a46140e1166?w=600&h=500&auto=format&fit=crop&q=60",
-    mint: "https://images.unsplash.com/photo-1656501020056-1c631268e3d0?w=600&h=450&auto=format&fit=crop&q=60" // Decreased height
-  };
+  // Update age value label when slider changes
+  plantAge.addEventListener("input", () => {
+    ageValue.textContent = `${plantAge.value} weeks`;
+  });
 
-    const generateBtn = document.getElementById("generate-btn");
-    const seedSelect = document.getElementById("seed-select");
-    const plantAgeInput = document.getElementById("plant-age");
+  // Generate content on button click
+  window.fetchContent = async () => {
+    const seed = seedSelect.value;
+    const age = plantAge.value;
 
-    if (!generateBtn || !seedSelect || !plantAgeInput) {
-        console.error("One or more required elements are missing.");
-        return;
+    if (!seed) {
+      output.textContent = "Please select a seed.";
+      return;
     }
 
-    generateBtn.addEventListener("click", function () {
-        const selectedSeed = seedSelect.value;
-        const plantAge = plantAgeInput.value;
+    output.textContent = "Generating plant visualization...";
 
-        if (!selectedSeed) {
-            alert("Please select a seed first!");
-            return;
-        }
+    const prompt = `Describe the growth and visual appearance of a ${seed} plant at ${age} weeks old. Include color, size, and notable features.`;
 
-        console.log("Seed selected:", selectedSeed);
-        console.log("Plant Age:", plantAge);
+    try {
+      const res = await fetch("/apis/content", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt }),
+      });
 
-        const noSelection = document.getElementById("no-selection");
-        const plantVisualization = document.getElementById("plant-visualization");
-        const plantName = document.getElementById("plant-name");
-        const plantImage = document.getElementById("plant-image");
-        const growthStage = document.getElementById("growth-stage");
-        const displayAge = document.getElementById("display-age");
-        const growthProgress = document.getElementById("growth-progress");
-        const expectedHarvest = document.getElementById("expected-harvest");
-
-        if (!plantName || !plantImage || !growthStage || !displayAge || !growthProgress || !expectedHarvest) {
-            console.error("One or more required visualization elements are missing.");
-            return;
-        }
-
-        noSelection.classList.add("d-none");
-        plantVisualization.classList.remove("d-none");
-
-
-        plantName.textContent = selectedSeed.charAt(0).toUpperCase() + selectedSeed.slice(1);
-        plantImage.src = plantImages[selectedSeed];
-        plantImage.alt = `${selectedSeed} plant`;
-
-        let stageText = "Seedling";
-        if (plantAge >= 4 && plantAge < 8) {
-            stageText = "Vegetative";
-        } else if (plantAge >= 8) {
-            stageText = "Mature & Blooming";
-        }
-        growthStage.textContent = stageText;
-
-        displayAge.textContent = plantAge;
-
-        const progressPercentage = Math.round((plantAge / 12) * 100);
-        growthProgress.style.width = `${progressPercentage}%`;
-        growthProgress.textContent = `${progressPercentage}%`;
-
-        expectedHarvest.textContent = plantAge >= 8 ? "Ready for harvest soon!" : "Keep nurturing your plant!";
-    });
+      const data = await res.json();
+      output.textContent = data.result;
+    } catch (err) {
+      console.error("Error:", err);
+      output.textContent = "Something went wrong while generating content.";
+    }
+  };
 });
 
+          </script>
 
-</script>
 
-    
 
           <div class="seed-selector-card">
             <h2>Select a Seed</h2>
@@ -165,10 +216,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 <span>12 weeks</span>
               </div>
             </div>
-            <button id="generate-btn" class="btn btn-gold w-100">Generate Plant Visualization</button>
+            <button id="generate-btn" class="btn btn-gold w-100"
+             onclick="fetchContent()" 
+            type="submit">Generate Plant Visualization</button>
           </div>
         </div>
-        
+
         <!-- Plant Visualization and Tips -->
         <div class="col-lg-8">
           <div class="growth-card">
@@ -177,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <i class="bi bi-flower3 text-teal" style="font-size: 4rem;"></i>
               <p class="mt-3">Select a seed and click "Generate" to see how your plant will look.</p>
             </div>
-            
+
             <div id="plant-visualization" class="d-none">
               <div class="row mb-4">
                 <div class="col-md-6">
@@ -188,7 +241,8 @@ document.addEventListener("DOMContentLoaded", function () {
                       </div>
                       <p class="mt-3">Generating plant visualization...</p>
                     </div>
-                    <img id="plant-image" src="/placeholder.svg" alt="Plant Visualization" class="img-fluid rounded shadow-sm">
+                    <img id="plant-image" src="/placeholder.svg" alt="Plant Visualization"
+                      class="img-fluid rounded shadow-sm">
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -206,16 +260,15 @@ document.addEventListener("DOMContentLoaded", function () {
                   </div>
                 </div>
               </div>
-              
+
               <h3>Growth Tips Based on Current Weather</h3>
               <div id="weather-tips" class="weather-tips">
                 <div class="alert alert-teal">
                   <i class="bi bi-info-circle me-2"></i>
-                  <!-- Select a seed to see weather-specific growing tips. -->
-                   <p><%=result%></p>
+                  <p id="output"></p>
                 </div>
               </div>
-              
+
               <h3>Care Instructions</h3>
               <div id="care-instructions" class="care-instructions">
               </div>
@@ -225,6 +278,3 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
   </main>
-
-  
- 

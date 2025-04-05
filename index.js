@@ -21,8 +21,8 @@ const cors=require("cors");
 const bcrypt=require("bcrypt");
 const bodyParser = require("body-parser");
 const gemini_api_key = process.env.API_KEY;
-const generate=require("./script.js");
-const { console } = require("inspector");
+const {generate}=require("./script.js");
+const weather=process.env.Weather_key;
 
 
 const googleAI = new GoogleGenerativeAI(gemini_api_key);
@@ -163,12 +163,13 @@ app.get("/logout", (req, res) => {
 })
 
 app.post("/apis/content", async (req, res) => {
+    const {data}=req.body;
     try {
-        const data="write 5 line about virat kholi";
-        const result = await generate(data);
+        const result = await generate(`give 5 lines for how to grow ${data}plant `);
         res.locals.result=result;
-        console.log(res.locals.result);
-        res.send({ result });
+        // res.render("./HOME/live-updates.ejs",{result});
+        res.send({result});
+        console.log(result);
     } catch (err) {
         console.error(err);
         res.status(500).send({ error: "Internal Server Error" });
