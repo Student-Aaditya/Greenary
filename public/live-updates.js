@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 // Plant data
 const plantData = {
     sunflower: {

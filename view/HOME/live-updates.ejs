@@ -19,7 +19,7 @@
             </div>
           </div>
 
-<!-- Weather API addition -->
+
         <script>
     document.addEventListener("DOMContentLoaded", function () {
         const apiKey = Weather_key; 
@@ -143,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
     
-<!-- Weather API addition ends -->
 
           <div class="seed-selector-card">
             <h2>Select a Seed</h2>
@@ -212,13 +211,13 @@ document.addEventListener("DOMContentLoaded", function () {
               <div id="weather-tips" class="weather-tips">
                 <div class="alert alert-teal">
                   <i class="bi bi-info-circle me-2"></i>
-                  Select a seed to see weather-specific growing tips.
+                  <!-- Select a seed to see weather-specific growing tips. -->
+                   <p><%=result%></p>
                 </div>
               </div>
               
               <h3>Care Instructions</h3>
               <div id="care-instructions" class="care-instructions">
-                <!-- Care instructions will be populated here -->
               </div>
             </div>
           </div>
@@ -227,20 +226,5 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 text-center text-md-start">
-          <a href="/" class="footer-brand"><i class="bi bi-leaf-fill"></i> Greenica</a>
-          <p>Connecting locals with the environment</p>
-        </div>
-        <div class="col-md-6 text-center text-md-end">
-          <p><i class="bi bi-envelope"></i> plant.greenica@gmail.com | <i class="bi bi-telephone"></i> +1 (555) 123-4567</p>
-          <p>© 2025 Greenica. All rights reserved.</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
+  
  

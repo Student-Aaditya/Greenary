@@ -2,6 +2,7 @@ if (process.env.NODE_ENV != "Production") {
     require("dotenv").config();
 }
 
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const express=require("express");
 const app=express();
 const port=8020;
@@ -18,6 +19,17 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const cors=require("cors");
 const bcrypt=require("bcrypt");
+const bodyParser = require("body-parser");
+const gemini_api_key = process.env.API_KEY;
+const generate=require("./script.js");
+const { console } = require("inspector");
+
+
+const googleAI = new GoogleGenerativeAI(gemini_api_key);
+const geminiModel = googleAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+});
+
 
 
 app.set("views",path.join(__dirname,"view"));
@@ -28,6 +40,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); 
+app.use(bodyParser.json());
 
 app.use(methodOverride("_method"));
 
@@ -51,7 +64,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
     res.locals.user=req.user;
     res.locals.time=req.time;
-
+    res.locals.result=req.result;
     next();
 })
 
@@ -60,8 +73,8 @@ async function main() {
     try {
         console.log("Attempting to connect to MongoDB...");
         await mongoose.connect("mongodb://127.0.0.1:27017/Greenica", {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
+            // useNewUrlParser: true,
+            // useUnifiedTopology: true,
             serverSelectionTimeoutMS: 20000,  
         });
         console.log("Successful connection to MongoDB");
@@ -84,23 +97,6 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
-
-
-
-const adminAuth = async (req, res, next) => {
-    if (!req.isAuthenticated()) {
-        return res.status(401).json({ message: "You must be logged in." });
-    }
-
-    const user = await User.findById(req.user._id);
-    if (!user || user.role !== "admin") {
-        return res.status(403).json({ message: "Access denied. Admins only." });
-    }
-
-    next();
-};
-
-
 
 main().
     then(() => {
@@ -165,6 +161,19 @@ app.get("/logout", (req, res) => {
         res.status(500).send("please fill the data");
     }
 })
+
+app.post("/apis/content", async (req, res) => {
+    try {
+        const data="write 5 line about virat kholi";
+        const result = await generate(data);
+        res.locals.result=result;
+        console.log(res.locals.result);
+        res.send({ result });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: "Internal Server Error" });
+    }
+});
 
 app.get("/admin",(req,res)=>{
     res.render("admin.ejs");
