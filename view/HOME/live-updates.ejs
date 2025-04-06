@@ -171,8 +171,7 @@
 
     output.textContent = "Generating plant visualization...";
 
-    const prompt = `Describe the growth and visual appearance of a ${seed} plant at ${age} weeks old. Include color, size, and notable features.`;
-
+    const prompt = `Give 5 plant tips in short. For general gardening and nurturing in a small space.`;
     try {
       const res = await fetch("/apis/content", {
         method: "POST",
